@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人网站</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="home-page">
+    <!-- 视差背景层 -->
+    <div class="parallax-bg"></div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">陈华明的个人网站</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">首页</a></li>
+                    <li class="nav-item"><a class="nav-link" href="campus.html">校园时光</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">关于我</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首页内容 -->
+    <div class="container mt-5 pt-4">
+        <div class="row align-items-center parallax-element" data-speed="0.2">
+            <div class="col-md-4 text-center">
+                <img src="images/avatar.jpg" class="img-fluid rounded-circle avatar" alt="张三的头像">
+            </div>
+            <div class="col-md-8">
+                <h1 class="display-4">欢迎来到我的世界</h1>
+                <p class="lead">一名热爱学习与探索的大学生</p>
+                <a href="campus.html" class="btn btn-primary btn-lg">探索我的校园生活</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS + 视差脚本 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) return;
+        
+        const parallaxBg = document.querySelector('.parallax-bg');
+        const parallaxElements = document.querySelectorAll('.parallax-element');
+        let scrollPos = 0;
+
+        function updateParallax() {
+            parallaxBg.style.transform = `translateY(${scrollPos * 0.1}px)`;
+            parallaxElements.forEach(element => {
+                const speed = parseFloat(element.dataset.speed) || 0.3;
+                element.style.transform = `translateY(${scrollPos * speed}px)`;
+            });
+        }
+
+        window.addEventListener('scroll', () => {
+            scrollPos = window.pageYOffset;
+            requestAnimationFrame(updateParallax);
+        });
+        updateParallax();
+    });
+    </script>
+</body>
+</html>

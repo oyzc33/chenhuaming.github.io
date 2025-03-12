@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="about-page">
+    <!-- 视差背景层 -->
+    <div class="parallax-bg"></div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">陈华明的个人网站</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">首页</a></li>
+                    <li class="nav-item"><a class="nav-link" href="campus.html">校园时光</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html">关于我</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 内容容器 -->
+    <div class="container mt-5 pt-5">
+        <!-- 局部遮罩层 -->
+        <div class="content-overlay"></div>
+
+        <div class="row align-items-center">
+            <!-- 头像（视差元素） -->
+            <div class="col-md-4 text-center mb-4 parallax-element" data-speed="0.3">
+                <img src="images/avatar.jpg" class="img-fluid rounded-circle profile-avatar" alt="马旭东的头像">
+            </div>
+
+            <!-- 个人信息（视差元素） -->
+            <div class="col-md-8 parallax-element" data-speed="0.2">
+                <h1 class="display-4 mb-3">陈华明</h1>
+                <p class="lead text-muted mb-4">
+                    21岁 · 广东岭南职业技术学院 · 计算机网络技术专业<br>
+                    <span class="text-primary">❤</span> 码农 | 极客 | 音乐达人 | 摄影爱好者
+                </p>
+                <div class="d-flex flex-wrap gap-2 mb-4">
+                    <span class="badge bg-primary">Python全栈开发</span>
+                    <span class="badge bg-success">人工智能</span>
+                    <span class="badge bg-warning text-dark">电子音乐制作</span>
+                    <span class="badge bg-danger">人像摄影</span>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="btn btn-outline-dark btn-lg me-2">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="#" class="btn btn-outline-primary btn-lg me-2">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="#" class="btn btn-outline-danger btn-lg">
+                        <i class="fas fa-heart"></i> 个人博客
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS + 视差脚本 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) return;
+        
+        const parallaxBg = document.querySelector('.parallax-bg');
+        const parallaxElements = document.querySelectorAll('.parallax-element');
+        let scrollPos = 0;
+
+        function updateParallax() {
+            parallaxBg.style.transform = `translateY(${scrollPos * 0.1}px)`;
+            parallaxElements.forEach(element => {
+                const speed = parseFloat(element.dataset.speed) || 0.3;
+                element.style.transform = `translateY(${scrollPos * speed}px)`;
+            });
+        }
+
+        window.addEventListener('scroll', () => {
+            scrollPos = window.pageYOffset;
+            requestAnimationFrame(updateParallax);
+        });
+        updateParallax();
+    });
+    </script>
+</body>
+</html>
